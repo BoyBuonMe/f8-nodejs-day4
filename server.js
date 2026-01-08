@@ -4,14 +4,13 @@ require('module-alias/register');
 
 const express = require("express");
 const cors = require("cors");
-// const appRoute = require("@/routes");
+const response = require("@/middlewares/responseFormat");
+const appRoute = require("@/routes");
 const app = express();
 const port = 3000;
 
 app.use(express.json());
-
-console.log(process.env);
-
+app.use(response);
 
 const origins = ["http://localhost:5173", "https://boybuonme.github.io"];
 
@@ -42,7 +41,7 @@ app.options("/api/", cors(corsOptions));
 //   res.error(400, "Task not found", null);
 // });
 
-// app.use("/api", appRoute);
+app.use("/api", appRoute);
 
 
 app.listen(port, () => {
